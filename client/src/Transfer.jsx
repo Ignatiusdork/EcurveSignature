@@ -1,9 +1,18 @@
 import { useState } from "react";
 import server from "./server";
+import * as secp from 'ethereum-cryptography/secp256k1';
+import { toHex, utf8ToBytes } from 'ethereum-cryptography/utils';
 
 function Transfer({ address, setBalance }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [r, setR] = useState()
+  const [s, setS] = useState()
+  const [recovery, setRecovery] = useState()
+  const [publicKey, setPublicKey] = useState("");
+
+  console.log(r,"- ", s)
+  console.log(typeof r, typeof s)
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
 
@@ -17,6 +26,10 @@ function Transfer({ address, setBalance }) {
         sender: address,
         amount: parseInt(sendAmount),
         recipient,
+        recovery,
+        r,
+        s,
+        publicKey,
       });
       setBalance(balance);
     } catch (ex) {
@@ -35,6 +48,37 @@ function Transfer({ address, setBalance }) {
           value={sendAmount}
           onChange={setValue(setSendAmount)}
         ></input>
+      </label>
+
+      <label>
+         Enter your signed message
+         <input
+          placeholder="publicKey"
+          value={publicKey}
+          onChange={setValue(setPublicKey)}
+         >
+         </input>
+         
+         <input
+          placeholder="recovery"
+          value={recovery}
+          onChange={setValue(setRecovery)}
+         >
+         </input>
+
+         <input
+          placeholder="r"
+          value={r}
+          onChange={setValue(setR)}
+         >
+         </input>
+
+         <input
+          placeholder="s"
+          value={s}
+          onChange={setValue(setS)}
+         >
+         </input>
       </label>
 
       <label>
