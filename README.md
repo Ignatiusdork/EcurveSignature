@@ -10,13 +10,17 @@ For an overview of this project as well as getting started instructions, check o
 https://www.loom.com/share/0d3c74890b8e44a5918c4cacb3f646c4
 
 Client
+
 The client folder contains a react app using vite. To get started, follow these steps:
 
 1.Open up a terminal in the /client folder
 2.Run npm install to install all the depedencies
 3.Run npm run dev to start the application
 4.Now you should be able to visit the app at http://127.0.0.1:5173/
+
+
 Server
+
 The server folder contains a node.js server using express. To run the server, follow these steps:
 
 1.Open a terminal within the /server folder
